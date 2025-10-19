@@ -24,3 +24,16 @@ class Test_GlobalVariable(unittest.TestCase):
         # assert the function returned the new value and the module global changed
         self.assertEqual(returned, 1)
         self.assertEqual(qb.global_counter, 1)
+
+from src.question_c import question_c as qc
+
+class Test_AssessmentAndTax(unittest.TestCase):
+    def test_get_assessment_value(self):
+        # assessment is 60% of actual value
+        self.assertAlmostEqual(qc.get_assessment_value(10000), 6000)
+        self.assertAlmostEqual(qc.get_assessment_value(20000), 12000)
+
+    def test_get_tax_assessed(self):
+        # tax is $0.72 per $100 -> 0.0072 * assessment_value
+        self.assertAlmostEqual(qc.get_tax_assessed(6000), 43.20, places=2)
+        self.assertAlmostEqual(qc.get_tax_assessed(10000), 72.00, places=2)
