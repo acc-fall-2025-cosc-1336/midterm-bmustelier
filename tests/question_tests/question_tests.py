@@ -37,3 +37,23 @@ class Test_AssessmentAndTax(unittest.TestCase):
         # tax is $0.72 per $100 -> 0.0072 * assessment_value
         self.assertAlmostEqual(qc.get_tax_assessed(6000), 43.20, places=2)
         self.assertAlmostEqual(qc.get_tax_assessed(10000), 72.00, places=2)
+
+from src.question_d import question_d as qd
+
+class Test_AssessmentAndTax(unittest.TestCase):
+    def test_get_assessment_value(self):
+        # assessment is 60% of actual value
+        self.assertAlmostEqual(qc.get_assessment_value(10000), 6000)
+        self.assertAlmostEqual(qc.get_assessment_value(20000), 12000)
+
+    def test_get_tax_assessed(self):
+        # tax is $0.72 per $100 -> 0.0072 * assessment_value
+        self.assertAlmostEqual(qc.get_tax_assessed(6000), 43.20, places=2)
+        self.assertAlmostEqual(qc.get_tax_assessed(10000), 72.00, places=2)
+
+class Test_LocalVariable(unittest.TestCase):
+    def test_use_local_variable_does_not_change_num(self):
+        num = 100
+        qd.use_local_variable(num)
+        # local assignment inside function should not modify caller's variable
+        self.assertEqual(num, 100)
